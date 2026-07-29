@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>グリーンノート | ゴルフ勉強サイト</title>
+<meta name="robots" content="noai, noimageai">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #f2e9d2;
+    --cream-light: #faf5e6;
+    --sand-line: #e3d5ac;
+    --green-deep: #123324;
+    --green-mid: #1e4a34;
+    --green-neon: #a6ff2f;
+    --green-neon-soft: #d4ffa1;
+    --ink: #14251b;
+    --ink-soft: #3d5548;
+    --shadow: rgba(18,51,36,0.18);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Shippori Mincho', serif;
+    line-height:1.9;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3,.headline{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    color:var(--green-deep);
+    letter-spacing:0.02em;
+  }
+
+  a{ color:inherit; text-decoration:none; }
+
+  /* ===== dimple texture background ===== */
+  .dimple-bg{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(18,51,36,0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 38% 62%, rgba(18,51,36,0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 64% 22%, rgba(18,51,36,0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 82% 70%, rgba(18,51,36,0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 24% 88%, rgba(18,51,36,0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 92% 40%, rgba(18,51,36,0.06) 0 3px, transparent 4px);
+    background-size: 260px 260px;
+    background-color:var(--cream);
+  }
+
+  /* ===== header / nav ===== */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(242,233,210,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--sand-line);
+  }
+  .nav-wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:18px 28px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .brand{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+    font-size:1.15rem;
+    color:var(--green-deep);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .brand .flag-dot{
+    width:10px; height:10px;
+    background:var(--green-neon);
+    border-radius:50%;
+    box-shadow:0 0 0 3px rgba(166,255,47,0.25);
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:34px;
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:0.92rem;
+    font-weight:700;
+  }
+  nav a{
+    position:relative;
+    color:var(--ink-soft);
+    padding:4px 2px;
+    transition:color 0.2s;
+  }
+  nav a:hover{ color:var(--green-deep); }
+  nav a::after{
+    content:"";
+    position:absolute;
+    left:0; bottom:-4px;
+    width:0%; height:3px;
+    background:var(--green-neon);
+    transition:width 0.25s ease;
+  }
+  nav a:hover::after, nav a.current::after{ width:100%; }
+
+  /* ===== hero ===== */
+  .hero{
+    max-width:1080px;
+    margin:0 auto;
+    padding:90px 28px 70px;
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:40px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:0.8rem;
+    font-weight:700;
+    letter-spacing:0.22em;
+    color:var(--green-mid);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px; height:2px;
+    background:var(--green-neon);
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 3.6rem);
+    font-weight:900;
+    line-height:1.25;
+    margin-bottom:24px;
+  }
+  .hero h1 .accent{
+    color:var(--green-mid);
+    background:linear-gradient(transparent 62%, var(--green-neon-soft) 62%);
+  }
+  .hero p{
+    font-size:1.02rem;
+    color:var(--ink-soft);
+    max-width:46ch;
+    margin-bottom:34px;
+  }
+  .hero-cta{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--green-deep);
+    color:var(--cream-light);
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:700;
+    font-size:0.92rem;
+    padding:14px 26px;
+    border-radius:2px;
+    box-shadow:4px 4px 0 var(--green-neon);
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .hero-cta:hover{
+    transform:translate(-2px,-2px);
+    box-shadow:6px 6px 0 var(--green-neon);
+  }
+
+  /* ===== hero flag illustration ===== */
+  .hero-art{ display:flex; justify-content:center; align-items:flex-end; height:100%; }
+  .hero-art svg{ width:100%; max-width:300px; height:auto; }
+
+  /* ===== section shared ===== */
+  section{ max-width:1080px; margin:0 auto; padding:70px 28px; }
+  .section-head{ margin-bottom:44px; }
+  .section-head .tag{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:0.75rem;
+    font-weight:700;
+    letter-spacing:0.2em;
+    color:var(--green-mid);
+    margin-bottom:10px;
+    display:block;
+  }
+  .section-head h2{
+    font-size:1.8rem;
+    font-weight:700;
+  }
+
+  /* ===== about strip ===== */
+  .about-strip{
+    background:var(--green-deep);
+    color:var(--cream-light);
+    padding:0;
+  }
+  .about-strip-inner{
+    max-width:1080px;
+    margin:0 auto;
+    padding:70px 28px;
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:50px;
+    align-items:center;
+  }
+  .about-strip h2{ color:var(--green-neon); font-size:1.7rem; margin-bottom:20px; }
+  .about-strip p{ color:#dbe9d8; font-size:0.98rem; }
+  .score-card{
+    background:var(--cream-light);
+    color:var(--ink);
+    border-radius:4px;
+    padding:26px 26px 22px;
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    box-shadow:6px 6px 0 rgba(166,255,47,0.35);
+  }
+  .score-card .sc-title{
+    font-size:0.75rem;
+    letter-spacing:0.18em;
+    color:var(--green-mid);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .score-row{
+    display:flex;
+    justify-content:space-between;
+    padding:9px 0;
+    border-bottom:1px dashed var(--sand-line);
+    font-size:0.9rem;
+  }
+  .score-row:last-child{ border-bottom:none; }
+  .score-row span:last-child{ font-weight:700; color:var(--green-mid); }
+
+  /* ===== nav cards (blog / gallery / about) ===== */
+  .card-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:26px;
+  }
+  .card{
+    background:var(--cream-light);
+    border:1px solid var(--sand-line);
+    border-radius:4px;
+    padding:32px 26px;
+    position:relative;
+    overflow:hidden;
+    transition:transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 14px 26px var(--shadow);
+    border-color:var(--green-neon);
+  }
+  .card .icon{
+    width:44px; height:44px;
+    margin-bottom:18px;
+  }
+  .card h3{
+    font-size:1.15rem;
+    margin-bottom:10px;
+  }
+  .card p{
+    color:var(--ink-soft);
+    font-size:0.88rem;
+    margin-bottom:20px;
+  }
+  .card .go{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:0.8rem;
+    font-weight:700;
+    color:var(--green-mid);
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .card .go svg{ width:14px; height:14px; transition:transform 0.2s; }
+  .card:hover .go svg{ transform:translateX(4px); }
+
+  /* ===== glossary teaser ===== */
+  .glossary{
+    background:var(--cream-light);
+    border-top:1px solid var(--sand-line);
+    border-bottom:1px solid var(--sand-line);
+  }
+  .glossary-inner{ max-width:1080px; margin:0 auto; padding:70px 28px; }
+  .term-list{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:0 40px;
+  }
+  .term{
+    display:flex;
+    gap:18px;
+    padding:18px 0;
+    border-bottom:1px solid var(--sand-line);
+  }
+  .term .jp{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:700;
+    color:var(--green-deep);
+    min-width:110px;
+  }
+  .term .desc{ color:var(--ink-soft); font-size:0.92rem; }
+
+  /* ===== footer ===== */
+  footer{
+    background:var(--green-deep);
+    color:#c9dbc9;
+    padding:60px 28px 32px;
+  }
+  .footer-inner{
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .footer-top{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:30px;
+    padding-bottom:34px;
+    border-bottom:1px solid rgba(255,255,255,0.14);
+    margin-bottom:24px;
+  }
+  .footer-brand{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900;
+    color:var(--green-neon);
+    font-size:1.1rem;
+  }
+  .footer-links{
+    display:flex;
+    gap:24px;
+    flex-wrap:wrap;
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:0.85rem;
+  }
+  .footer-links a{ color:#c9dbc9; }
+  .footer-links a:hover{ color:var(--green-neon); }
+  .footer-note{
+    font-size:0.78rem;
+    color:#8fa993;
+    line-height:1.8;
+  }
+
+  @media (max-width:820px){
+    .hero{ grid-template-columns:1fr; padding-top:60px; }
+    .hero-art{ order:-1; max-width:180px; margin:0 auto; }
+    .about-strip-inner{ grid-template-columns:1fr; }
+    .card-grid{ grid-template-columns:1fr; }
+    .term-list{ grid-template-columns:1fr; }
+    nav ul{ gap:18px; font-size:0.82rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="dimple-bg"></div>
+
+<header>
+  <div class="nav-wrap">
+    <div class="brand"><span class="flag-dot"></span>グリーンノート</div>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="current">ホーム</a></li>
+        <li><a href="blog.html">日記</a></li>
+        <li><a href="gallery.html">ギャラリー</a></li>
+        <li><a href="about.html">このサイトについて</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <div class="hero">
+    <div>
+      <span class="eyebrow">GOLF STUDY NOTES</span>
+      <h1>芝の匂いと<br><span class="accent">スコアの伸び</span>を<br>言葉にする。</h1>
+      <p>ルール、クラブ、コースマネジメント。ゴルフを一から学び直す個人の勉強記録です。上達の過程を、日記とギャラリーで少しずつ残していきます。</p>
+      <a href="blog.html" class="hero-cta">日記を読む
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="hero-art">
+      <!-- flagstick illustration -->
+      <svg viewBox="0 0 220 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="110" cy="300" rx="90" ry="16" fill="#123324" opacity="0.08"/>
+        <rect x="106" y="40" width="6" height="260" rx="3" fill="#123324"/>
+        <path d="M112 46 L190 76 L112 106 Z" fill="#a6ff2f"/>
+        <circle cx="60" cy="230" r="14" fill="#faf5e6" stroke="#123324" stroke-width="3"/>
+        <circle cx="55" cy="224" r="1.6" fill="#123324"/>
+        <circle cx="65" cy="224" r="1.6" fill="#123324"/>
+        <circle cx="60" cy="232" r="1.6" fill="#123324"/>
+        <circle cx="52" cy="234" r="1.6" fill="#123324"/>
+        <circle cx="68" cy="234" r="1.6" fill="#123324"/>
+        <path d="M10 300 Q110 270 210 300" stroke="#123324" stroke-width="3" fill="none" opacity="0.25"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- ===== ABOUT STRIP ===== -->
+  <div class="about-strip">
+    <div class="about-strip-inner">
+      <div>
+        <h2>なぜ学ぶのか</h2>
+        <p>SNSやYouTubeを眺める時間を減らし、手を動かして残るものを作る。そのひとつとしてゴルフを選びました。ルールブックを読み、練習場での気づきを書き留め、少しずつ自分の言葉でまとめていく場所です。</p>
+      </div>
+      <div class="score-card">
+        <div class="sc-title">STUDY SCORECARD</div>
+        <div class="score-row"><span>学習分野</span><span>ルール / クラブ / コース戦略</span></div>
+        <div class="score-row"><span>更新ペース</span><span>随時更新</span></div>
+        <div class="score-row"><span>記録方法</span><span>日記形式（日付のみ）</span></div>
+        <div class="score-row"><span>目標</span><span>コースを自分の言葉で語れること</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== NAV CARDS ===== -->
+  <section>
+    <div class="section-head">
+      <span class="tag">CONTENTS</span>
+      <h2>サイト内のコンテンツ</h2>
+    </div>
+    <div class="card-grid">
+
+      <a href="blog.html" class="card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#1e4a34" stroke-width="2.2"><rect x="8" y="6" width="32" height="36" rx="2"/><path d="M15 16h18M15 24h18M15 32h10"/></svg>
+        <h3>日記</h3>
+        <p>練習やラウンドで気づいたことを、日付だけを添えて短く残しています。</p>
+        <span class="go">読む<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <a href="gallery.html" class="card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#1e4a34" stroke-width="2.2"><rect x="6" y="8" width="36" height="28" rx="2"/><circle cx="17" cy="18" r="3.5"/><path d="M6 32l10-10 8 8 6-6 12 12"/></svg>
+        <h3>ギャラリー</h3>
+        <p>コースの風景やクラブ、印象に残った瞬間を写真や絵で記録します。</p>
+        <span class="go">見る<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+      <a href="about.html" class="card">
+        <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="#1e4a34" stroke-width="2.2"><circle cx="24" cy="24" r="18"/><path d="M24 16v10l7 4"/></svg>
+        <h3>このサイトについて</h3>
+        <p>サイトを作った経緯や、ゴルフを学ぶうえで大切にしていることをまとめています。</p>
+        <span class="go">詳しく<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ===== GLOSSARY TEASER ===== -->
+  <div class="glossary">
+    <div class="glossary-inner">
+      <div class="section-head">
+        <span class="tag">FIRST WORDS</span>
+        <h2>最初に覚えた言葉</h2>
+      </div>
+      <div class="term-list">
+        <div class="term"><span class="jp">フェアウェイ</span><span class="desc">ティーとグリーンの間の、芝が短く刈られた本来歩くべき道。</span></div>
+        <div class="term"><span class="jp">バンカー</span><span class="desc">砂が入った窪地の障害区域。脱出には専用のショットが要る。</span></div>
+        <div class="term"><span class="jp">パー</span><span class="desc">そのホールを何打で終えるべきかという基準の打数。</span></div>
+        <div class="term"><span class="jp">ラフ</span><span class="desc">フェアウェイの外側、芝が長く伸びて打ちにくいエリア。</span></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">グリーンノート</div>
+      <div class="footer-links">
+        <a href="https://azaleacreativeroom888.github.io/" target="_blank" rel="noopener">Azalea Creative Room</a>
+        <a href="https://azaleacreativeroom888.github.io/links.html" target="_blank" rel="noopener">Links</a>
+      </div>
+    </div>
+    <p class="footer-note">
+      当サイトの文章・画像は生成AIの学習利用を禁止します。/ This site's text and images may not be used for AI training purposes.<br>
+      © グリーンノート — 個人のゴルフ学習記録サイトです。
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
