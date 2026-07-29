@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>このサイトについて | グリーンノート</title>
+<meta name="robots" content="noai, noimageai">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Shippori+Mincho:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream: #f2e9d2;
+    --cream-light: #faf5e6;
+    --sand-line: #e3d5ac;
+    --green-deep: #123324;
+    --green-mid: #1e4a34;
+    --green-neon: #a6ff2f;
+    --green-neon-soft: #d4ffa1;
+    --ink: #14251b;
+    --ink-soft: #3d5548;
+    --shadow: rgba(18,51,36,0.18);
+    --red-soft: #b5533f;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Shippori Mincho', serif;
+    line-height:1.9;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.headline{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    color:var(--green-deep);
+    letter-spacing:0.02em;
+  }
+  a{ color:inherit; text-decoration:none; }
+
+  .dimple-bg{
+    position:fixed; inset:0; z-index:-1;
+    background-image:
+      radial-gradient(circle at 12% 18%, rgba(18,51,36,0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 38% 62%, rgba(18,51,36,0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 64% 22%, rgba(18,51,36,0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 82% 70%, rgba(18,51,36,0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 24% 88%, rgba(18,51,36,0.06) 0 3px, transparent 4px),
+      radial-gradient(circle at 92% 40%, rgba(18,51,36,0.06) 0 3px, transparent 4px);
+    background-size: 260px 260px;
+    background-color:var(--cream);
+  }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(242,233,210,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--sand-line);
+  }
+  .nav-wrap{
+    max-width:1080px; margin:0 auto; padding:18px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900; font-size:1.15rem; color:var(--green-deep);
+    display:flex; align-items:center; gap:8px;
+  }
+  .brand .flag-dot{
+    width:10px; height:10px; background:var(--green-neon);
+    border-radius:50%; box-shadow:0 0 0 3px rgba(166,255,47,0.25);
+  }
+  nav ul{
+    list-style:none; display:flex; gap:34px;
+    font-family:'Zen Kaku Gothic New', sans-serif; font-size:0.92rem; font-weight:700;
+  }
+  nav a{ position:relative; color:var(--ink-soft); padding:4px 2px; transition:color 0.2s; }
+  nav a:hover{ color:var(--green-deep); }
+  nav a::after{
+    content:""; position:absolute; left:0; bottom:-4px;
+    width:0%; height:3px; background:var(--green-neon); transition:width 0.25s ease;
+  }
+  nav a:hover::after, nav a.current::after{ width:100%; }
+
+  .page-head{
+    max-width:1080px; margin:0 auto; padding:80px 28px 30px;
+  }
+  .eyebrow{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:0.8rem; font-weight:700; letter-spacing:0.22em;
+    color:var(--green-mid); display:flex; align-items:center; gap:10px; margin-bottom:20px;
+  }
+  .eyebrow::before{ content:""; width:26px; height:2px; background:var(--green-neon); }
+  .page-head h1{ font-size:clamp(2rem, 4vw, 2.8rem); font-weight:900; margin-bottom:16px; }
+  .page-head p{ color:var(--ink-soft); max-width:56ch; font-size:0.98rem; }
+
+  main{ max-width:760px; margin:0 auto; padding:10px 28px 100px; }
+
+  /* ===== section label (from links.html convention) ===== */
+  .section-label{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:0.72rem;
+    font-weight:700;
+    color:var(--green-mid);
+    letter-spacing:0.28em;
+    text-transform:uppercase;
+    margin:52px 0 16px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .section-label::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg, var(--sand-line), transparent);
+  }
+  .section-label:first-of-type{ margin-top:0; }
+
+  .prose p{ color:var(--ink-soft); font-size:0.96rem; margin-bottom:14px; }
+  .prose p:last-child{ margin-bottom:0; }
+
+  /* ===== info cards (policy list) ===== */
+  .info-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+  }
+  .info-card{
+    background:var(--cream-light);
+    border:1px solid var(--sand-line);
+    border-radius:4px;
+    padding:18px 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .info-card::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0;
+    width:3px;
+    background:linear-gradient(180deg, var(--green-neon), transparent);
+  }
+  .info-card .k{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:0.8rem;
+    font-weight:700;
+    color:var(--green-deep);
+    margin-bottom:6px;
+  }
+  .info-card .v{ font-size:0.86rem; color:var(--ink-soft); }
+
+  /* ===== profile strip ===== */
+  .profile-card{
+    display:flex;
+    gap:20px;
+    align-items:center;
+    background:var(--green-deep);
+    border-radius:4px;
+    padding:26px 26px;
+    color:#dbe9d8;
+  }
+  .profile-card .avatar{
+    width:64px; height:64px;
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 30%, var(--green-neon-soft), var(--green-mid) 70%);
+    flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .profile-card .avatar svg{ width:30px; height:30px; }
+  .profile-card h3{ color:var(--green-neon); font-size:1rem; margin-bottom:6px; }
+  .profile-card p{ font-size:0.88rem; color:#c9dbc9; }
+
+  /* ===== form card (from links.html convention, recolored) ===== */
+  .form-card{
+    background:var(--cream-light);
+    border:1px solid var(--sand-line);
+    border-radius:4px;
+    padding:30px 30px 32px;
+    position:relative;
+    overflow:hidden;
+  }
+  .form-card::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0;
+    width:3px;
+    background:linear-gradient(180deg, var(--green-neon), transparent);
+  }
+  .form-intro{ font-size:0.92rem; color:var(--ink-soft); margin-bottom:22px; }
+  .form-group{ margin-bottom:18px; }
+  .form-label{
+    display:block;
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:0.76rem;
+    font-weight:700;
+    letter-spacing:0.12em;
+    color:var(--green-mid);
+    margin-bottom:7px;
+  }
+  .required{ color:var(--red-soft); font-style:normal; }
+  .form-input, .form-textarea{
+    width:100%;
+    background:#fff;
+    border:1px solid var(--sand-line);
+    border-radius:3px;
+    color:var(--ink);
+    font-family:'Shippori Mincho', serif;
+    font-size:0.94rem;
+    padding:11px 14px;
+    outline:none;
+    transition:border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-input::placeholder, .form-textarea::placeholder{ color:#a89b7e; }
+  .form-input:focus, .form-textarea:focus{
+    border-color:var(--green-neon);
+    box-shadow:0 0 0 3px rgba(166,255,47,0.2);
+  }
+  .form-textarea{ resize:vertical; min-height:130px; }
+  .field-error{ display:block; font-size:0.75rem; color:var(--red-soft); margin-top:5px; }
+  .form-submit{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--green-deep);
+    color:var(--cream-light);
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:700; font-size:0.9rem;
+    border:none;
+    border-radius:2px;
+    padding:13px 26px;
+    cursor:pointer;
+    box-shadow:4px 4px 0 var(--green-neon);
+    transition:transform 0.2s, box-shadow 0.2s;
+    margin-top:6px;
+  }
+  .form-submit:hover{ transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--green-neon); }
+  .form-submit:disabled{ opacity:0.5; cursor:not-allowed; transform:none; box-shadow:4px 4px 0 var(--green-neon); }
+  .form-success{
+    background:var(--cream);
+    border:1px solid var(--green-neon);
+    border-radius:3px;
+    padding:16px 20px;
+    text-align:center;
+    color:var(--green-deep);
+    font-size:0.9rem;
+    margin-bottom:20px;
+  }
+  .form-success-icon{ display:block; font-size:1.2rem; margin-bottom:6px; }
+  .form-error-global{
+    background:rgba(181,83,63,0.1);
+    border:1px solid rgba(181,83,63,0.35);
+    border-radius:3px;
+    padding:12px 16px;
+    color:var(--red-soft);
+    font-size:0.85rem;
+    margin-bottom:16px;
+  }
+
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:40px;
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-size:0.85rem;
+    font-weight:700;
+    color:var(--ink-soft);
+    padding:10px 18px;
+    border:1px solid var(--sand-line);
+    border-radius:2px;
+    transition:all 0.2s;
+  }
+  .back-link:hover{ color:var(--green-deep); border-color:var(--green-neon); background:var(--cream-light); }
+
+  footer{
+    background:var(--green-deep);
+    color:#c9dbc9;
+    padding:60px 28px 32px;
+  }
+  .footer-inner{ max-width:1080px; margin:0 auto; }
+  .footer-top{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:30px;
+    padding-bottom:34px; border-bottom:1px solid rgba(255,255,255,0.14); margin-bottom:24px;
+  }
+  .footer-brand{
+    font-family:'Zen Kaku Gothic New', sans-serif;
+    font-weight:900; color:var(--green-neon); font-size:1.1rem;
+  }
+  .footer-links{
+    display:flex; gap:24px; flex-wrap:wrap;
+    font-family:'Zen Kaku Gothic New', sans-serif; font-size:0.85rem;
+  }
+  .footer-links a{ color:#c9dbc9; }
+  .footer-links a:hover{ color:var(--green-neon); }
+  .footer-note{ font-size:0.78rem; color:#8fa993; line-height:1.8; }
+
+  @media (max-width:600px){
+    nav ul{ gap:16px; font-size:0.8rem; }
+    .info-grid{ grid-template-columns:1fr; }
+    .profile-card{ flex-direction:column; text-align:center; }
+    .form-card{ padding:24px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="dimple-bg"></div>
+
+<header>
+  <div class="nav-wrap">
+    <div class="brand"><span class="flag-dot"></span>グリーンノート</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">ホーム</a></li>
+        <li><a href="blog.html">日記</a></li>
+        <li><a href="gallery.html">ギャラリー</a></li>
+        <li><a href="about.html" class="current">このサイトについて</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="page-head" style="padding-left:0; padding-right:0;">
+    <span class="eyebrow">ABOUT</span>
+    <h1>このサイトについて</h1>
+    <p>ゴルフを一から学ぶ過程を記録している、個人の勉強サイトです。</p>
+  </div>
+
+  <p class="section-label">サイトの目的</p>
+  <div class="prose">
+    <p>SNSやYouTubeを眺める時間を減らし、手を動かして残るものを作る。その取り組みのひとつとして、ゴルフを学び始めました。ルールブックを読み、練習場での気づきを書き留め、少しずつ自分の言葉でまとめていく場所として「グリーンノート」を作っています。</p>
+    <p>上手くなることよりも、コースやプレーにまつわる言葉を自分のものにしていく過程そのものを大切にしています。</p>
+  </div>
+
+  <p class="section-label">サイトの構成</p>
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="k">日記</div>
+      <div class="v">練習やラウンドで気づいたことを、日付だけを添えて短く記録します。</div>
+    </div>
+    <div class="info-card">
+      <div class="k">ギャラリー</div>
+      <div class="v">コースの風景やクラブ、印象に残った瞬間を写真や絵で残します。</div>
+    </div>
+    <div class="info-card">
+      <div class="k">更新ペース</div>
+      <div class="v">決まった頻度は設けず、気づいたときに随時更新します。</div>
+    </div>
+    <div class="info-card">
+      <div class="k">立場</div>
+      <div class="v">ゴルフを学び始めたばかりの初心者による個人の記録です。</div>
+    </div>
+  </div>
+
+  <p class="section-label">運営者について</p>
+  <div class="profile-card">
+    <div class="avatar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#123324" stroke-width="2.2"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4.5 5-6 8-6s6.5 1.5 8 6"/></svg>
+    </div>
+    <div>
+      <h3>グリーンノート運営者</h3>
+      <p>漫画やイラストを中心に創作活動をしながら、趣味としてゴルフの勉強を始めました。学んだことを整理する場として、このサイトを運営しています。ほかの制作物は下のリンクからご覧いただけます。</p>
+    </div>
+  </div>
+
+  <p class="section-label">お問い合わせ</p>
+
+  <div class="form-card">
+    <p class="form-intro">サイトについてのご感想・ご指摘などはこちらからどうぞ。</p>
+
+    <div data-fs-success class="form-success" style="display:none;">
+      <span class="form-success-icon">✓</span>
+      <p>メッセージを送信しました。ありがとうございます。</p>
+    </div>
+
+    <div data-fs-error class="form-error-global" style="display:none;"></div>
+
+    <form id="contact-form" action="https://formspree.io/f/maqvpvoz" method="POST">
+
+      <div class="form-group">
+        <label class="form-label" for="name">お名前</label>
+        <input class="form-input" type="text" id="name" name="name" placeholder="お名前（任意）">
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">メールアドレス <span class="required">*</span></label>
+        <input class="form-input" type="email" id="email" name="email" data-fs-field placeholder="example@email.com" required>
+        <span data-fs-error="email" class="field-error"></span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="message">メッセージ <span class="required">*</span></label>
+        <textarea class="form-textarea" id="message" name="message" data-fs-field placeholder="メッセージを入力してください…" rows="6" required></textarea>
+        <span data-fs-error="message" class="field-error"></span>
+      </div>
+
+      <button class="form-submit" type="submit" data-fs-submit-btn>送信する</button>
+
+    </form>
+  </div>
+
+  <a class="back-link" href="index.html">← トップページに戻る</a>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">グリーンノート</div>
+      <div class="footer-links">
+        <a href="https://azaleacreativeroom888.github.io/" target="_blank" rel="noopener">Azalea Creative Room</a>
+        <a href="https://azaleacreativeroom888.github.io/links.html" target="_blank" rel="noopener">Links</a>
+      </div>
+    </div>
+    <p class="footer-note">
+      当サイトの文章・画像は生成AIの学習利用を禁止します。/ This site's text and images may not be used for AI training purposes.<br>
+      © グリーンノート — 個人のゴルフ学習記録サイトです。
+    </p>
+  </div>
+</footer>
+
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contact-form', formId: 'maqvpvoz' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+</html>
